@@ -105,32 +105,32 @@ if (a, b < c || a, c < b || b, c < a
 // Task 7
 
 let currentTime = new Date();
+let currentHour = currentTime.getHours();
 
-if (currentTime >= 23 && currentTime < 5) {
+if (currentHour >= 23 || currentHour < 5) {
     alert("Доброї ночі")
-} else if (currentTime >= 5 && currentTime < 11) {
+} else if (currentHour >= 5 || currentHour < 11) {
     alert("Доброго ранку")
-} else if (currentTime >=11 && currentTime < 17) {
+} else if (currentHour >=11 || currentHour < 17) {
     alert("Доброго дня")
-} else (currentTime >= 17 && currentTime < 23); {
+} else {
     alert("Доброго вечора")
-};
+}
 
-
-switch (currentTime.getHours()) {
+switch (currentHour) {
     case 23:
-    case 00:
-    case 01:
-    case 02:
-    case 03:
-    case 04:
+    case 0:
+    case 1:
+    case 2:
+    case 3:
+    case 4:
         alert("Доброї ночі");
     break;
-    case 05:
-    case 06:
-    case 07:
-    case 08:
-    case 09:
+    case 5:
+    case 6:
+    case 7:
+    case 8:
+    case 9:
     case 10:
         alert("Доброго ранку");
     break;
