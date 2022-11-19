@@ -1,11 +1,11 @@
 // Task 1
 
 let newWin = window.open('/', 'task 1', 'width=300,height=300');
-setTimeout (function() {
-    newWin.resizeTo(width=500, height=500);
-    setTimeout (function() {
+setTimeout(function () {
+    newWin.resizeTo(width = 500, height = 500);
+    setTimeout(function () {
         newWin.moveTo(200, 200);
-        setTimeout (function () {
+        setTimeout(function () {
             newWin.close()
         }, 2000)
     }, 2000)
@@ -15,7 +15,7 @@ setTimeout (function() {
 // Task 2
 
 function changeCSS() {
-    document.getElementById("text").style = "color: orange; font-size: 20px; font-family: Comic Sans MS"
+    document.getElementById("text").style = "color: orange; font-size: 20px; font-family: Comic Sans MS";
 }
 
 
@@ -31,8 +31,8 @@ btn1.addEventListener("click", changeBackground1);
 btn2.addEventListener("dblclick", changeBackground2);
 btn3.addEventListener("mousedown", changeBackground3)
 btn3.addEventListener("mouseup", changeBackground5);
-link.addEventListener ("mouseover", changeBackground4);
-link.addEventListener ("mouseout", changeBackground5);
+link.addEventListener("mouseover", changeBackground4);
+link.addEventListener("mouseout", changeBackground5);
 
 
 // Task 4
@@ -50,10 +50,10 @@ document.getElementById("submit").onclick = function () {
 document.querySelector("#livebtn").onclick = function () {
     message.insertAdjacentHTML("beforeend", "<p>I was pressed!</p>")
 };
-document.querySelector("#livebtn").onmouseover = function() {
+document.querySelector("#livebtn").onmouseover = function () {
     message.insertAdjacentHTML("beforeend", "<p>Mouse on me!</p>")
 };
-document.querySelector("#livebtn").onmouseout = function() {
+document.querySelector("#livebtn").onmouseout = function () {
     message.insertAdjacentHTML("beforeend", "<p>Mouse is not on me!</p>")
 };
 
@@ -61,3 +61,38 @@ document.querySelector("#livebtn").onmouseout = function() {
 // Task 6
 
 window.onresize = () => document.getElementById("window-size").innerHTML = `Width: ${window.innerWidth}, Height: ${window.innerHeight}`
+
+
+// Task 7
+
+let gerCities = ["Berlin", "Hamburg", "Munich", "Dortmund"];
+let usaCities = ["New-York", "Washington", "Boston", "Chikago"];
+let ukrCities = ["Kyiv", "Kharkiv", "Lviv", "Odesa"];
+
+let selectCountry = document.querySelector("#country");
+let cities = document.querySelector("#cities");
+let p = document.querySelector("#result");
+
+selectCountry.addEventListener("click", function (event) {
+
+    if (event.target.value == "ger") {
+        new Option(gerCities.forEach((ger, i) => {
+            cities[i] = new Option(gerCities[i]);
+        }));
+    } else if (event.target.value == "usa") {
+        new Option(usaCities.forEach((usa, i) => {
+            cities[i] = new Option(usaCities[i]);
+        }));
+    } else if (event.target.value == "ukr") {
+        new Option(ukrCities.forEach((ukr, i) => {
+            cities[i] = new Option(ukrCities[i]);
+        }));
+    };
+});
+
+let country = selectCountry.addEventListener("change", () => {
+    p.innerHTML = selectCountry.options[selectCountry.selectedIndex].text + ", ";
+})
+let city = cities.addEventListener("change", () => {
+    p.innerHTML += cities.value;
+});
