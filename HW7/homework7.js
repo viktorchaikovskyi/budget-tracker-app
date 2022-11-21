@@ -73,26 +73,26 @@ let selectCountry = document.querySelector("#country");
 let cities = document.querySelector("#cities");
 let p = document.querySelector("#result");
 
-selectCountry.addEventListener("click", function (event) {
+selectCountry.addEventListener("change", function (event) {
 
     if (event.target.value == "ger") {
-        new Option(gerCities.forEach((ger, i) => {
+        gerCities.forEach((ger, i) => {
             cities[i] = new Option(gerCities[i]);
-        }));
+        });
     } else if (event.target.value == "usa") {
-        new Option(usaCities.forEach((usa, i) => {
+        usaCities.forEach((usa, i) => {
             cities[i] = new Option(usaCities[i]);
-        }));
+        });
     } else if (event.target.value == "ukr") {
-        new Option(ukrCities.forEach((ukr, i) => {
+        ukrCities.forEach((ukr, i) => {
             cities[i] = new Option(ukrCities[i]);
-        }));
+        });
     };
 });
 
-let country = selectCountry.addEventListener("change", () => {
-    p.innerHTML = selectCountry.options[selectCountry.selectedIndex].text + ", ";
-})
-let city = cities.addEventListener("change", () => {
-    p.innerHTML += cities.value;
-});
+let country = selectCountry.addEventListener("change", addToParagraph);
+let city = cities.addEventListener("change", addToParagraph);
+
+function addToParagraph() {
+    p.innerHTML = selectCountry.options[selectCountry.selectedIndex].text + ", " + cities.value;
+}
