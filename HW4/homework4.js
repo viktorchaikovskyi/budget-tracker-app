@@ -55,9 +55,9 @@ let month = prompt("Enter the desirable number from 1 to 12");
 function showMonthName(month) {
     try {
         if (month < 1 || month > 12) {
-            throw new Error ("Incorrect month number");
+            throw new MonthException ("Incorrect month number");
         } else if (isNaN(month)) {
-            throw new Error ("Invalid value. Entered data is not a number");
+            throw new MonthException ("Invalid value. Entered data is not a number");
         }
     } catch (exception) {
             console.log(exception.name + ": " + exception.message)
@@ -73,7 +73,7 @@ function showUser(id) {
     if (id < 0) {
         throw new Error ("ID must not be negative");
 };
-    return {id: id};
+    return {id: id}; // або {id}
 }
 
 function showUsers(ids) {
@@ -87,4 +87,4 @@ function showUsers(ids) {
     }
     return users;
 }
-console.log (showUsers([7, -12, 44, 22]));
+console.log(showUsers([7, -12, 44, 22]));

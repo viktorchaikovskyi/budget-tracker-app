@@ -8,7 +8,6 @@ let id = document.getElementById("test").innerHTML = "Last";
 
 // Task 2
 
-
 alert(document.querySelector(".image").src = "cat.jpg");
 
 // або
