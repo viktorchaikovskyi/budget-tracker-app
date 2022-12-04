@@ -6,7 +6,6 @@ console.log(x);
 console.log(y);
 console.log(z);
 
-
 // Task 2
 let data = {
     names: ["Sam", "Tom", "Ray", "Bob"],
