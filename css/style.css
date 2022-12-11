@@ -2202,13 +2202,8 @@ input:checked + .slider:before {
 }
 
 .active {
-  background-color: theme('colors.blue.600');
-  color: #1a56db;
-  border: theme('colors.blue.600'), darken(theme('colors.blue.500'));
- /* hover:text-blue-600 */
- /* border-blue-600 */
-  /* dark:text-blue-500
-  dark:hover:text-blue-400 */
- 
-  /* dark:border-blue-500 */
+  /* background-color: #1a56db !important; */
+  color: rgb(231, 231, 18) !important;
+  border: rgb(231, 231, 18) !important;
+  /* dark:hover:text-blue-400 border-blue-600 dark:border-blue-500 */
 }

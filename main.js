@@ -18,19 +18,13 @@ settings.addEventListener("click", () => {
 }, 1000); */
 
 
-
-// document.querySelector(".balance-value").innerHTML = prompt("ddtlsnm pначення")
-// document.querySelector(".outcome-total").innerHTML = +prompt("ddtlsnm 342pначення")
-
 // ! УСІ ПЕРЕМІННІ
-
 
 // const balance = document.querySelector("#balance");
 const balance = document.getElementById("total-amount");
 const chartEl = document.querySelector(".chart1");
 const totalAmount = document.getElementById("total-amount-value");
 const balance2 = document.getElementById("balance2");
-
 
 
 
@@ -48,9 +42,6 @@ const expenseBtn = document.querySelector(".outcome-tab");
 const incomeBtn = document.querySelector(".income-tab");
 const allBtn = document.querySelector(".all-tab");
 
-/* const expenseBtn = document.querySelector(".tab1");
-const incomeBtn = document.querySelector(".tab2");
-const allBtn = document.querySelector(".tab3"); */
 
 // ? INPUTS
 // const addExpense = document.querySelector(".add-expense");
@@ -131,17 +122,55 @@ addIncome.addEventListener("click", () => {
 
 document.querySelector(".balance2").innerHTML = `${balance}`;
 
+// ! -------- РЕДАГУВАТИ / ВИДАЛИТИ ----------
+
+incomeList.addEventListener("click", editOrDelete)
+expenseList.addEventListener("click", editOrDelete)
+allList.addEventListener("click", editOrDelete)
+function editOrDelete(event) {
+    const targetBtn = event.target;
+
+    const entry = targetBtn.parentNode;
+    
+    if (targetBtn.id == DELETE) {
+        deleteEntry(entry);
+    } else if (targetBtn.id == EDIT) {
+        editEntry(entry);
+    }
+}
+
+function deleteEntry(entry) {
+    ENTRY_LIST.splice(entry.id, 1);
+    updateUI();
+}
+
+function editEntry(entry) {
+    let ENTRY = ENTRY_LIST[entry.id];
+
+    if (ENTRY.type == "income") {
+        incomeAmount.value = ENTRY.amount;
+        incomeTitle.value = ENTRY.title;
+    } else if (ENTRY.type == "expense") {
+        expenseAmount.value = ENTRY.amount;
+        expenseTitle.value = ENTRY.title;
+    }
+    deleteEntry(entry);
+}
+
+
+
+
 // ! ---------- ДОПОМОГА -----------
 
 function updateUI() {
     let income = calculateTotal("income", ENTRY_LIST);
     let expense = calculateTotal("expense", ENTRY_LIST);
-    let balance = Math.abs(calculateBalance(income, expense));
+    let balance = calculateBalance(income, expense);
 
 
     clearElement([expenseList, incomeList, allList]);
 
-    let sign = (income >= expense) ? "₴" : "-₴";
+    // let sign = (income >= expense) ? "₴" : "-₴";
 
     ENTRY_LIST.forEach((entry, index) => {
         if (entry.type == "expense") {
@@ -157,17 +186,17 @@ function updateUI() {
 
     // ? -------- UPDATE UI --------
     balanceEl.innerHTML = `${balance}`;
-    // <small>${sign}</small>
+    // <small>${sign} </small>
     expenseTotal.innerHTML = `${expense}`;
     // <small>₴</small>
     incomeTotal.innerHTML = `${income}`;
     // <small>₴</small>
 }
 
-function showEntry(list, type, title, amount, comment, date, id) {
+/* function showEntry(list, type, title, amount, comment, date, id) {
     const entry = ` <div id = "${id}" class="${type} sublist-content bg-white dark:text-white dark:border-gray-600 dark:bg-gray-700 rounded-lg">
                         <p class="entry">${title}</p>
-                        <p class="amount-list"><small>₴</small>${amount}</p>
+                        <p class="amount-list">${amount}<small> ₴</small></p>
                         <p class="entry">${comment}</p>
                         <p class="entry">${date}</p>
                         <button type="button" id="edit" class="fa-solid fa-pen-to-square dark:text-gray-400"></button>
@@ -178,22 +207,22 @@ function showEntry(list, type, title, amount, comment, date, id) {
     // <p class="entry">${date}</p>
 
     list.insertAdjacentHTML("afterbegin", entry);
-};
+}; */
 
 
-/* function showEntry(list, type, title, amount, comment, date, id) {
+function showEntry(list, type, title, amount, comment, date, id) {
     const entry = `<tr id = "${id}" class="${type} bg-white border-b dark:bg-gray-800 dark:border-gray-700">
         <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">${title}</th>
-        <td class="amount-list py-4 px-3"><small>₴</small>${amount}</td>
+        <td class="amount-list py-4 px-3">${amount} <small>₴</small></td>
         <td class="py-4 px-4">${comment}</td>
         <td class="py-4 px-6">${date}</td>
         <td><button type="button" id="edit" class="py-4 px-3 fa-solid fa-pen-to-square dark:text-gray-400"></button></td>
         <td><button type="button" id="delete" class="py-4 pl-3 pr-6 delete-item fa-solid fa-trash dark:text-gray-400"></button></td>
     </tr>`;
 
-list = document.querySelector("table > tbody");
+// list = document.querySelector("table > tbody");
 list.insertAdjacentHTML("afterbegin", entry);
-} */
+}
 
 // let changeCurrency
 
@@ -254,32 +283,7 @@ function inactive(elementsArray) {
 };
 
 
-//Function To Create List
-/* const listCreator = (expenseName, expenseValue) => {
-    let sublistContent = document.createElement("div");
-    sublistContent.classList.add("sublist-content", "flex-space");
-    list.appendChild(sublistContent);
-    sublistContent.innerHTML = `<p class="product">${expenseName}</p><p class="amount">${expenseValue}</p>`;
-    let editButton = document.createElement("button");
-    editButton.classList.add("fa-solid", "fa-pen-to-square", "edit");
-    editButton.style.fontSize = "1.2em";
-    editButton.addEventListener("click", () => {
-      modifyElement(editButton, true);
-    });
-    let deleteButton = document.createElement("button");
-    deleteButton.classList.add("fa-solid", "fa-trash-can", "delete");
-    deleteButton.style.fontSize = "1.2em";
-    deleteButton.addEventListener("click", () => {
-      modifyElement(deleteButton);
-    });
-    sublistContent.appendChild(editButton);
-    sublistContent.appendChild(deleteButton);
-    document.getElementById("list").appendChild(sublistContent);
-  }; */
-
-
-
-// LOOK IF THERE IS SAVED DATA IN LOCALSTORAGE
+// ? ---------- ЗБЕРЕЖЕННЯ ДАНИХ В ЛОКАЛЬНОМУ СХОВИЩІ -----------
 ENTRY_LIST = JSON.parse(localStorage.getItem("entry_list")) || [];
 updateUI();
 
@@ -295,10 +299,11 @@ updateUI();
 // ! ---------- ПОШУК ЕЛЕМЕНТІВ У ТАБЛИЦІ ----------
 document.querySelector("#table-search").oninput = function () {
     let value = this.value.trim();
-    let elasticItems = document.querySelectorAll(".list div");
+    let elasticItems = document.querySelectorAll(".list tr");
     
     if (value != "") {
         elasticItems.forEach(function (element) {
+            // let elementSearch = element.innerText.search(value);
             let elementSearch = element.innerText.search(value);
             if (elementSearch == -1) {
                 element.classList.add("hidden");
@@ -317,10 +322,9 @@ document.querySelector("#table-search").oninput = function () {
     }
 };
 
-function insertMark(string, position, len) {
+/* function insertMark(string, position, len) {
     return string.slice(0, position) + "<mark>" + string.slice(position, position + len) + "</mark>" + string.slice(position + len);
-};
-
+}; */
 
 
 // ! -------- СОРТУВАННЯ ---------
@@ -329,13 +333,12 @@ const sortByCategoryBtn = document.querySelector(".sort-by-category");
 const sortByPriceBtn = document.querySelector(".sort-by-price");
 const sortByDateBtn = document.querySelector(".sort-by-date");
 
-
-/* sortByCategoryBtn.addEventListener("click", function() {
+sortByCategoryBtn.addEventListener("click", function() {
 let sortedRows = Array.from(table.rows)
   .slice(1)
   .sort((a, b) => a.cells[0].innerHTML < b.cells[0].innerHTML ? 1 : -1);
 table.tBodies[0].append(...sortedRows);
-}); */
+});
 
 /* sortByPriceBtn.addEventListener("click", function() {
 let sortedRows = Array.from(table.rows)
@@ -352,56 +355,6 @@ table.tBodies[0].append(...sortedRows);
 });  */
 
 
-
-
-// let table = document.querySelector("#table");
-// let tableArr = table.querySelectorAll('tr');
-// console.log(table);
-
-// let sortedRows = Array.from(table.rows);
-// arr = sortedRows.slice(1);
-// console.log(arr);
-// console.log(document.getElementById("table").rows[1].cells[3].innerHTML); 
-
-// console.table(arr.sort( (a, b) => {
-//     a.cells[3].innerHTML > b.cells[3].innerHTML ? 1 : -1; 
-// }));
-// // console.log(sortedRows.cells[2]);
-// arr(table.tBodies[0].append(...sortedRows));
-
-//     let str = a.cells[0].textContent;
-//     let str2 = b.cells[0].textContent;
-//     return str.localeCompare(str2);
-// }));
-
-// console.log(sortedRows);
-/* let sortedRows = Array.from(table.rows);
-console.log(sortedRows);
-let arr = sortedRows.slice(1);
-console.log(arr);
-document.querySelector(".sort-by-price").addEventListener("click", arr.sort( (a, b) => {
-    // let str = a.cells[0].textContent;
-    // let str2 = b.cells[0].textContent;
-    // return str.localeCompare(str2);
-
-    return b.cells[0].textContent - a.cells[0].textContent;   
-})); */
-// updateUI();
-
-// amount
-// console.log(table.tBodies[0].append(...arr));
-
-
-// document.querySelector(".sort-by-price").addEventListener("click", ENTRY_LIST.sort(function (a, b) {
-//     // if (a.date > b.date) {
-//     //     return 1;
-//     // }
-//     if (a.date < b.date) {
-//         return -1;
-//     }
-//     return updateUI();
-// })
-// )
 /* document.querySelector(".sort-by-price").addEventListener("click", ENTRY_LIST.sort(function (a, b) {
     if (a.amount > b.amount) {
         return 1;
@@ -421,13 +374,6 @@ expenseBtn.addEventListener("click", () => {
     active(expenseBtn);
     inactive([incomeBtn, allBtn]);
 });
-
-/* expenseBtn.addEventListener("click", () => {
-    show(expenseEl);
-    hide([incomeEl, allEl]);
-    active(expenseBtn);
-    inactive([incomeBtn, allBtn]);
-}); */
 
 incomeBtn.addEventListener("click", () => {
     show([addAmounts, incomeEl, incomeAmount, addIncome]);
@@ -482,30 +428,29 @@ document.getElementById('save-changes').addEventListener("click", () => {
     //     document.querySelector("#popup-modal").classList.add("flex");
 
 
-/* deleteBtn.addEventListener("click", function() {
-    let sel = document.querySelector(".delete-item").innerHTML;
-    for (let i = 0; i < sel.length; i++) {
-        sel[i].remove();
-    };
-}); */
+// deleteBtn.addEventListener("click", function() {
+//     let sel = document.querySelector(".delete-item").innerHTML;
+//     for (let i = 0; i < sel.length; i++) {
+//         sel[i].remove();
+//     };
+// });
 
 
 // ! CHARTS
-
-
 
 const ctx2 = document.getElementById('chart-2').getContext('2d');
 const chart2 = new Chart (ctx2, {
   type: 'bar',
   data: {
-    labels: ['Витрати', 'Доходи', 'Баланс'],
+    labels: ['Витрати', 'Доходи', 'Втрати(-)/Прибуток(+)'],
     datasets: [{
-      label: ['Red', 'Red', 'Red'],
-      data: [expenseTotal.innerText, incomeTotal.innerText, balance.innerText],
+      label: ['Red'],
+      data: [expenseTotal.innerText, incomeTotal.innerText, balanceEl.innerText],
       backgroundColor: [
         'rgb(255, 99, 132)',
-        'rgb(75, 192, 192)',
-        'rgb(255, 205, 86)'
+        'rgb(26, 180, 85)',
+        'rgb(255, 205, 86)',
+        // 'rgb(121, 27, 189)'
         ],
       borderWidth: 1
     }],
@@ -520,25 +465,12 @@ const chart2 = new Chart (ctx2, {
   }
 });
 
-chart2.update()
+chart2.update();
 updateUI();
 // chart2.data.datasets[0].data.push(expenseTotal.innerText, incomeTotal.innerText);
 // chart2.update()
 console.log(chart2.data.datasets[0].data);
 
-/* 
-const push = document.getElementById('chart-2');
-push(pushValueChart());
-
-function pushValueChart(){
-  console.log(chart2.data.datasets[0].data);
-//   chart2.data.datasets[0].data.push(7);
-//   console.log(chart2.data.datasets[0].data);
-  
-  chart2.data.datasets[0].data.push(incomeTotal.innerText);
-  chart2.data.datasets[0].data.push(balance.innerText);
-  chart2.update();
-} */
 
 
 
