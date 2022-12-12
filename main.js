@@ -44,7 +44,6 @@ const allBtn = document.querySelector(".all-tab");
 
 
 // ? INPUTS
-// const addExpense = document.querySelector(".add-expense");
 const addExpense = document.querySelector(".add-expense");
 const expenseTitle = document.getElementById("category-button");
 const expenseAmount = document.getElementById("outcome-total");
@@ -122,40 +121,7 @@ addIncome.addEventListener("click", () => {
 
 document.querySelector(".balance2").innerHTML = `${balance}`;
 
-// ! -------- РЕДАГУВАТИ / ВИДАЛИТИ ----------
 
-incomeList.addEventListener("click", editOrDelete)
-expenseList.addEventListener("click", editOrDelete)
-allList.addEventListener("click", editOrDelete)
-function editOrDelete(event) {
-    const targetBtn = event.target;
-
-    const entry = targetBtn.parentNode;
-    
-    if (targetBtn.id == DELETE) {
-        deleteEntry(entry);
-    } else if (targetBtn.id == EDIT) {
-        editEntry(entry);
-    }
-}
-
-function deleteEntry(entry) {
-    ENTRY_LIST.splice(entry.id, 1);
-    updateUI();
-}
-
-function editEntry(entry) {
-    let ENTRY = ENTRY_LIST[entry.id];
-
-    if (ENTRY.type == "income") {
-        incomeAmount.value = ENTRY.amount;
-        incomeTitle.value = ENTRY.title;
-    } else if (ENTRY.type == "expense") {
-        expenseAmount.value = ENTRY.amount;
-        expenseTitle.value = ENTRY.title;
-    }
-    deleteEntry(entry);
-}
 
 
 
@@ -224,11 +190,8 @@ function showEntry(list, type, title, amount, comment, date, id) {
 list.insertAdjacentHTML("afterbegin", entry);
 }
 
-// let changeCurrency
-
-/* <td class="py-4 px-6 text-right">
-    <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
-</td> */
+/* let currency = document.getElementById("currency")
+function changeCurrency() */
 
 
 function clearElement(elements) {
@@ -256,6 +219,42 @@ function clearInput(inputs) {
         input.value = "";
     });
 };
+
+
+// ! -------- РЕДАГУВАТИ / ВИДАЛИТИ ----------
+
+incomeList.addEventListener("click", editOrDelete);
+expenseList.addEventListener("click", editOrDelete);
+allList.addEventListener("click", editOrDelete);
+function editOrDelete(event) {
+    const targetBtn = event.target;
+
+    const entry = targetBtn.parentNode;
+    
+    if (targetBtn.id == DELETE) {
+        deleteEntry(entry);
+    } else if (targetBtn.id == EDIT) {
+        editEntry(entry);
+    }
+}
+
+function deleteEntry(entry) {
+    ENTRY_LIST.splice(entry.id, 1);
+    updateUI();
+}
+
+function editEntry(entry) {
+    let ENTRY = ENTRY_LIST[entry.id];
+
+    if (ENTRY.type == "income") {
+        incomeAmount.value = ENTRY.amount;
+        incomeTitle.value = ENTRY.title;
+    } else if (ENTRY.type == "expense") {
+        expenseAmount.value = ENTRY.amount;
+        expenseTitle.value = ENTRY.title;
+    }
+    deleteEntry(entry);
+}
 
 
 
@@ -327,45 +326,46 @@ document.querySelector("#table-search").oninput = function () {
 }; */
 
 
+// !! -------- ПРЕВЮ ------
+
+function showPrewiew(event) {
+    let src = URL.createObjectURL(event.target.files[0]);
+    let preview = document.getElementById("image-preview-file");
+    preview.src = src;
+    preview.style.display = "block";
+}
+
+
+
 // ! -------- СОРТУВАННЯ ---------
 
-const sortByCategoryBtn = document.querySelector(".sort-by-category");
-const sortByPriceBtn = document.querySelector(".sort-by-price");
-const sortByDateBtn = document.querySelector(".sort-by-date");
+const sortByCategoryBtn = document.querySelector("#table .sort-by-category");
+const sortByPriceBtn = document.querySelector("#table .sort-by-price");
+const sortByDateBtn = document.querySelector("#table .sort-by-date");
 
 sortByCategoryBtn.addEventListener("click", function() {
+    console.log("КАТЕГОРІЯ");
 let sortedRows = Array.from(table.rows)
   .slice(1)
-  .sort((a, b) => a.cells[0].innerHTML < b.cells[0].innerHTML ? 1 : -1);
+  .sort((a, b) => a.cells[0].innerHTML > b.cells[0].innerHTML ? 1 : -1); 
 table.tBodies[0].append(...sortedRows);
 });
 
-/* sortByPriceBtn.addEventListener("click", function() {
+sortByPriceBtn.addEventListener("click", function() {
+    console.log("ЦІНА");
 let sortedRows = Array.from(table.rows)
   .slice(1)
-  .sort((a, b) => a.cells[1].innerHTML > b.cells[1].innerHTML ? 1 : -1);
+  .sort((a, b) => a.cells[1].innerText > b.cells[1].innerText ? 1 : -1);
 table.tBodies[0].append(...sortedRows);
 });
 
 sortByDateBtn.addEventListener("click", function() {
+    console.log("ДАТА");
 let sortedRows = Array.from(table.rows)
   .slice(1)
   .sort((a, b) => a.cells[2].innerHTML > b.cells[2].innerHTML ? 1 : -1);
 table.tBodies[0].append(...sortedRows);
-});  */
-
-
-/* document.querySelector(".sort-by-price").addEventListener("click", ENTRY_LIST.sort(function (a, b) {
-    if (a.amount > b.amount) {
-        return 1;
-    }
-    if (a.amount < b.amount) {
-        return -1;
-    }
-    // return 0
-})
-) */
-
+}); 
 
 // ? ПРОСЛУХОВУВАЧІ ПОДІЙ
 expenseBtn.addEventListener("click", () => {
