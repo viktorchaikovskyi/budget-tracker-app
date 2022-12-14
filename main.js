@@ -1,4 +1,3 @@
-
 // ! ВИКЛИК МЕНЮ "НАЛАШТУВАННЯ"
 
 let settings = document.getElementById('settings-tab-example');
@@ -17,7 +16,6 @@ settings.addEventListener("click", () => {
     document.querySelector("#authentication-modal2").classList.add("flex");
 }, 1000); */
 
-
 // ! УСІ ПЕРЕМІННІ
 
 // const balance = document.querySelector("#balance");
@@ -25,8 +23,6 @@ const balance = document.getElementById("total-amount");
 const chartEl = document.querySelector(".chart1");
 const totalAmount = document.getElementById("total-amount-value");
 const balance2 = document.getElementById("balance2");
-
-
 
 const expenseEl = document.getElementById("expense");
 const incomeEl = document.getElementById("income");
@@ -41,7 +37,6 @@ const allList = document.querySelector("#all .list");
 const expenseBtn = document.querySelector(".outcome-tab");
 const incomeBtn = document.querySelector(".income-tab");
 const allBtn = document.querySelector(".all-tab");
-
 
 // ? INPUTS
 const addExpense = document.querySelector(".add-expense");
@@ -74,11 +69,6 @@ let ENTRY_LIST = [];
 const DELETE = "delete", EDIT = "edit";
 
 // ENTRY_LIST = JSON.parse(localStorage.getItem("entry_list")) || [];
-
-
-
-// import { hello } from './module.js';
-
 
 // ! ----------------- КНОПКИ -----------------
 
@@ -118,24 +108,15 @@ addIncome.addEventListener("click", () => {
     clearInput([incomeTitle, incomeAmount, comment]);
 });
 
-
 document.querySelector(".balance2").innerHTML = `${balance}`;
 
-
-
-
-
-
 // ! ---------- ДОПОМОГА -----------
-
 function updateUI() {
     let income = calculateTotal("income", ENTRY_LIST);
     let expense = calculateTotal("expense", ENTRY_LIST);
     let balance = calculateBalance(income, expense);
 
-
     clearElement([expenseList, incomeList, allList]);
-
     // let sign = (income >= expense) ? "₴" : "-₴";
 
     ENTRY_LIST.forEach((entry, index) => {
@@ -159,35 +140,17 @@ function updateUI() {
     // <small>₴</small>
 }
 
-/* function showEntry(list, type, title, amount, comment, date, id) {
-    const entry = ` <div id = "${id}" class="${type} sublist-content bg-white dark:text-white dark:border-gray-600 dark:bg-gray-700 rounded-lg">
-                        <p class="entry">${title}</p>
-                        <p class="amount-list">${amount}<small> ₴</small></p>
-                        <p class="entry">${comment}</p>
-                        <p class="entry">${date}</p>
-                        <button type="button" id="edit" class="fa-solid fa-pen-to-square dark:text-gray-400"></button>
-                        <button type="button" id="delete" class="delete-item fa-solid fa-trash dark:text-gray-400"></button>
-                    </div>`;
-
-    // const position = "afterbegin";
-    // <p class="entry">${date}</p>
-
-    list.insertAdjacentHTML("afterbegin", entry);
-}; */
-
-
 function showEntry(list, type, title, amount, comment, date, id) {
     const entry = `<tr id = "${id}" class="${type} bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-        <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">${title}</th>
-        <td class="amount-list py-4 px-3">${amount} <small>₴</small></td>
+        <td scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">${title}</td>
+        <td class="amount-list py-4 px-3">${amount}</td>
         <td class="py-4 px-4">${comment}</td>
         <td class="py-4 px-6">${date}</td>
         <td><button type="button" id="edit" class="py-4 px-3 fa-solid fa-pen-to-square dark:text-gray-400"></button></td>
         <td><button type="button" id="delete" class="py-4 pl-3 pr-6 delete-item fa-solid fa-trash dark:text-gray-400"></button></td>
     </tr>`;
 
-// list = document.querySelector("table > tbody");
-list.insertAdjacentHTML("afterbegin", entry);
+    list.insertAdjacentHTML("afterbegin", entry);
 }
 
 /* let currency = document.getElementById("currency")
@@ -230,7 +193,7 @@ function editOrDelete(event) {
     const targetBtn = event.target;
 
     const entry = targetBtn.parentNode;
-    
+
     if (targetBtn.id == DELETE) {
         deleteEntry(entry);
     } else if (targetBtn.id == EDIT) {
@@ -287,19 +250,12 @@ ENTRY_LIST = JSON.parse(localStorage.getItem("entry_list")) || [];
 updateUI();
 
 
-// const formSetting = document.querySelector("#authentication-modal2")
-
-// const set = document.getElementById("settings-tab-example")
-
-
-// document.querySelector('balance-value').innerHTML = `${balance.value}`
-
 
 // ! ---------- ПОШУК ЕЛЕМЕНТІВ У ТАБЛИЦІ ----------
 document.querySelector("#table-search").oninput = function () {
     let value = this.value.trim();
     let elasticItems = document.querySelectorAll(".list tr");
-    
+
     if (value != "") {
         elasticItems.forEach(function (element) {
             // let elementSearch = element.innerText.search(value);
@@ -339,33 +295,98 @@ function showPrewiew(event) {
 
 // ! -------- СОРТУВАННЯ ---------
 
-const sortByCategoryBtn = document.querySelector("#table .sort-by-category");
-const sortByPriceBtn = document.querySelector("#table .sort-by-price");
-const sortByDateBtn = document.querySelector("#table .sort-by-date");
+function sortTable(n) {
+    var table, rows, switching, i, a, b, shouldSwitch, dir, switchcount = 0;
+    table = document.getElementById("table1", "table2", "table3");
+    switching = true;
+    // Set the sorting direction to ascending:
+    dir = "asc";
+    /* Make a loop that will continue until
+    no switching has been done: */
+    while (switching) {
+        // Start by saying: no switching is done:
+        switching = false;
+        rows = table.rows;
+        /* Loop through all table rows (except the
+        first, which contains table headers): */
+        for (i = 1; i < (rows.length - 1); i++) {
+            // Start by saying there should be no switching:
+            shouldSwitch = false;
+            /* Get the two elements you want to compare,
+            one from current row and one from the next: */
+            a = rows[i].getElementsByTagName("TD")[n];
+            b = rows[i + 1].getElementsByTagName("TD")[n];
+            /* Check if the two rows should switch place,
+            based on the direction, asc or desc: */
+            if (dir == "asc") {
+                if (a.innerHTML.toLowerCase() > b.innerHTML.toLowerCase()) {
+                    // If so, mark as a switch and break the loop:
+                    shouldSwitch = true;
+                    break;
+                }
+            } else if (dir == "desc") {
+                if (a.innerHTML.toLowerCase() < b.innerHTML.toLowerCase()) {
+                    // If so, mark as a switch and break the loop:
+                    shouldSwitch = true;
+                    break;
+                }
+            }
+        }
+        if (shouldSwitch) {
+            /* If a switch has been marked, make the switch
+            and mark that a switch has been done: */
+            rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+            switching = true;
+            // Each time a switch is done, increase this count by 1:
+            switchcount++;
+        } else {
+            /* If no switching has been done AND the direction is "asc",
+            set the direction to "desc" and run the while loop again. */
+            if (switchcount == 0 && dir == "asc") {
+                dir = "desc";
+                switching = true;
+            }
+        }
+    }
+}
 
-sortByCategoryBtn.addEventListener("click", function() {
-    console.log("КАТЕГОРІЯ");
-let sortedRows = Array.from(table.rows)
-  .slice(1)
-  .sort((a, b) => a.cells[0].innerHTML > b.cells[0].innerHTML ? 1 : -1); 
-table.tBodies[0].append(...sortedRows);
-});
+function sortTableByPrice() {
+    var table, rows, switching, i, a, b, shouldSwitch, dir, switchcount = 0;
+    table = document.getElementById("table1", "table2","table3");
+    switching = true;
+    dir = "asc";
+    while (switching) {
+        switching = false;
+        rows = table.rows;
+        for (i = 1; i < (rows.length - 1); i++) {
+            shouldSwitch = false;
+            a = rows[i].getElementsByTagName("TD")[1];
+            b = rows[i + 1].getElementsByTagName("TD")[1];
+            if (dir == "asc") {
+                if (parseInt(a.innerHTML.toLowerCase()) > parseInt(b.innerHTML.toLowerCase())) {
+                    shouldSwitch = true;
+                    break;
+                }
+            } else if (dir == "desc") {
+                if (parseInt(a.innerHTML.toLowerCase()) < parseInt(b.innerHTML.toLowerCase())) {
+                    shouldSwitch = true;
+                    break;
+                }
+            }
+        }
+        if (shouldSwitch) {
+            rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+            switching = true;
+            switchcount++;
+        } else {
+            if (switchcount == 0 && dir == "asc") {
+                dir = "desc";
+                switching = true;
+            }
+        }
+    }
+}
 
-sortByPriceBtn.addEventListener("click", function() {
-    console.log("ЦІНА");
-let sortedRows = Array.from(table.rows)
-  .slice(1)
-  .sort((a, b) => a.cells[1].innerText > b.cells[1].innerText ? 1 : -1);
-table.tBodies[0].append(...sortedRows);
-});
-
-sortByDateBtn.addEventListener("click", function() {
-    console.log("ДАТА");
-let sortedRows = Array.from(table.rows)
-  .slice(1)
-  .sort((a, b) => a.cells[2].innerHTML > b.cells[2].innerHTML ? 1 : -1);
-table.tBodies[0].append(...sortedRows);
-}); 
 
 // ? ПРОСЛУХОВУВАЧІ ПОДІЙ
 expenseBtn.addEventListener("click", () => {
@@ -423,9 +444,9 @@ document.getElementById('save-changes').addEventListener("click", () => {
     for (let i = 0; i < sel.length; i++);
     return sel[i].remove();
     }; */
-    // document.body.classList.add("overflow-hidden");
-    //     document.querySelector("#popup-modal").classList.remove("hidden");
-    //     document.querySelector("#popup-modal").classList.add("flex");
+// document.body.classList.add("overflow-hidden");
+//     document.querySelector("#popup-modal").classList.remove("hidden");
+//     document.querySelector("#popup-modal").classList.add("flex");
 
 
 // deleteBtn.addEventListener("click", function() {
@@ -439,30 +460,30 @@ document.getElementById('save-changes').addEventListener("click", () => {
 // ! CHARTS
 
 const ctx2 = document.getElementById('chart-2').getContext('2d');
-const chart2 = new Chart (ctx2, {
-  type: 'bar',
-  data: {
-    labels: ['Витрати', 'Доходи', 'Втрати(-)/Прибуток(+)'],
-    datasets: [{
-      label: ['Red'],
-      data: [expenseTotal.innerText, incomeTotal.innerText, balanceEl.innerText],
-      backgroundColor: [
-        'rgb(255, 99, 132)',
-        'rgb(26, 180, 85)',
-        'rgb(255, 205, 86)',
-        // 'rgb(121, 27, 189)'
-        ],
-      borderWidth: 1
-    }],
-  },
-  options: {
-    responsive: true,
-    scales: {
-      y: {
-        beginAtZero: true
-      }
+const chart2 = new Chart(ctx2, {
+    type: 'bar',
+    data: {
+        labels: ['Витрати', 'Доходи', 'Втрати(-)/Прибуток(+)'],
+        datasets: [{
+            label: ['Red'],
+            data: [expenseTotal.innerText, incomeTotal.innerText, balanceEl.innerText],
+            backgroundColor: [
+                'rgb(255, 99, 132)',
+                'rgb(26, 180, 85)',
+                'rgb(255, 205, 86)',
+                // 'rgb(121, 27, 189)'
+            ],
+            borderWidth: 1
+        }],
+    },
+    options: {
+        responsive: true,
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        }
     }
-  }
 });
 
 chart2.update();
@@ -470,9 +491,6 @@ updateUI();
 // chart2.data.datasets[0].data.push(expenseTotal.innerText, incomeTotal.innerText);
 // chart2.update()
 console.log(chart2.data.datasets[0].data);
-
-
-
 
 
 // ? Local storage

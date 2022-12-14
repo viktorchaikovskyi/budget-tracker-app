@@ -2207,3 +2207,7 @@ input:checked + .slider:before {
   border: rgb(231, 231, 18) !important;
   /* dark:hover:text-blue-400 border-blue-600 dark:border-blue-500 */
 }
+
+th {
+  cursor: pointer;
+}

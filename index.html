@@ -220,20 +220,10 @@
               <small>₴</small>0
             </div>
           </div>
-          <!-- <button type="submit"
-            class="total-balance text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-            Додати
-            <svg aria-hidden="true" class="w-10 h-5" fill="currentColor" viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg">
-              <path fill-rule="evenodd" d="M24 10h-10v-10h-4v10h-10v4h10v10h4v-10h10z" clip-rule="evenodd"></path>
-            </svg>
-          </button> -->
         </div>
-
         <div role="presentation"
           class="account toggle flex flex-wrap justify-center -mb-px text-sm font-medium text-center bg-green-600 text-gray-500 dark:text-gray-400">
           <!-- ? Кнопка Витрати -->
-          <!-- id="expense" -->
           <button type="button" role="tab" aria-controls="expense-tab" aria-selected="true"
             class="outcome-tab  inline-block py-2 px-4 rounded-t-lg border-b-2 border-transparent text-white hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300 active">
             <div class="title">
@@ -254,7 +244,6 @@
             </div>
           </div>
           <!-- ? Кнопка "Доходи" -->
-          <!-- id="income"  -->
           <button type="button" role="tab" aria-controls="income-tab" aria-selected="false" aria-labelledby="income"
             class="income-tab inline-block py-2 px-4 rounded-t-lg border-b-2 border-transparent text-white hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300">
             <div class="title">
@@ -265,8 +254,6 @@
             </div>
           </button>
         </div>
-
-        <!-- id="all" -->
         <button type="button" role="tab" aria-controls="all-tab" aria-selected="false" aria-labelledby="all"
           class="all-tab inline-block p-2 rounded-t-lg border-b-2 border-transparent text-white hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300">
           <div class="title">
@@ -275,8 +262,6 @@
           <div class="">
           </div>
         </button>
-        <!-- <div class="budget-header flex flex-wrap justify-center -mb-px text-base font-medium text-center bg-green-600 text-gray-500 dark:text-gray-400">   
-              </div> -->
       </div>
 
       <!-- ? Вибрати дату для введення -->
@@ -347,13 +332,10 @@
                   </select> -->
                 </div>
 
-                <!-- Виберіть підкатегорію -->
-
                 <!-- ?Коментар -->
                 <textarea id="comment" rows="2"
                   class="block my-2 p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   placeholder="Коментар"></textarea>
-
 
                 <!-- ? Додати фото -->
                 <div class="flex items-center justify-center w-full my-2">
@@ -366,18 +348,17 @@
                           d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12">
                         </path>
                       </svg>
-                      <p class="mb-2 text-center text-sm text-gray-500 dark:text-gray-400"><span class="font-semibold">Натисніть для завантаження</span><br>або перетягніть і відпустіть</p>
+                      <p class="mb-2 text-center text-sm text-gray-500 dark:text-gray-400"><span
+                          class="font-semibold">Натисніть для завантаження</span><br>або перетягніть і відпустіть</p>
                       <p class="text-xs text-gray-500 dark:text-gray-400">(SVG, PNG, JPG or GIF)</p>
                     </div>
-                    <input id="image-preview" type="file" name="upload-file" accept="image/*"  onchange="showPrewiew(event)" />
+                    <input id="image-preview" type="file" name="upload-file" accept="image/*"
+                      onchange="showPrewiew(event)"class="hidden" />
                     <div class="preview">
                       <img src="" alt="" id="image-preview-file" width="300">
                     </div>
                   </label>
-                  
                 </div>
-                <!-- class="hidden" -->
-
 
                 <!-- ? Додати елемент -->
                 <div class="flex justify-center">
@@ -400,18 +381,11 @@
                     </svg>
                   </button>
                 </div>
-
-
-
-
               </div>
             </div>
           </div>
         </div>
-
       </div>
-
-
 
       <div id="expense-tab" role="tabpanel" aria-labelledby="expense"
         class="relative flex min-h-max flex-col justify-center overflow-hidden mx-10 py-6 sm:py-12">
@@ -511,18 +485,13 @@
                 </div>
               </div>
 
-              <!-- <div class="toggle">
-                <button type="button" class="outcome-tab">Expenses</button>
-                <button type="button" class="income-tab">Income</button>
-                <button type="button" class="all-tab">All</button>
-              </div> -->
               <!-- block p-2 pl-10 w-80 text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 -->
               <!-- ? Список доходів -->
               <div id="income" class="overflow-x-auto relative shadow-md sm:rounded-lg">
-                <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                <table id="table1" class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                   <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                     <tr>
-                      <th scope="col" class="py-3 px-6">
+                      <th scope="col" class="py-3 px-6" onclick="sortTable(0)">
                         <div class="flex items-center">
                           Категорія
                           <button class="sort-by-category"><svg xmlns="http://www.w3.org/2000/svg" class="ml-1 w-3 h-3"
@@ -532,7 +501,7 @@
                             </svg></button>
                         </div>
                       </th>
-                      <th scope="col" class="py-3 px-3">
+                      <th scope="col" class="py-3 px-3" onclick="sortTableByPrice()">
                         <div class="flex items-center">
                           Сума
                           <button class="sort-by-price"><svg xmlns="http://www.w3.org/2000/svg" class="ml-1 w-3 h-3"
@@ -542,7 +511,7 @@
                             </svg></button>
                         </div>
                       </th>
-                      <th scope="col" class="py-3 px-4">
+                      <th scope="col" class="py-3 px-4" onclick="sortTable(2)">
                         <div class="flex items-center">
                           Дата
                           <button class="sort-by-date"><svg xmlns="http://www.w3.org/2000/svg" class="ml-1 w-3 h-3"
@@ -574,7 +543,7 @@
                 <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                   <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                     <tr>
-                      <th scope="col" class="py-3 px-6">
+                      <th scope="col" class="py-3 px-6" onclick="sortTable(0)">
                         <div class="flex items-center">
                           Категорія
                           <button class="sort-by-category"><svg xmlns="http://www.w3.org/2000/svg" class="ml-1 w-3 h-3"
@@ -584,7 +553,7 @@
                             </svg></button>
                         </div>
                       </th>
-                      <th scope="col" class="py-3 px-3">
+                      <th scope="col" class="py-3 px-3" onclick="sortTableByPrice()">
                         <div class="flex items-center">
                           Сума
                           <button class="sort-by-price"><svg xmlns="http://www.w3.org/2000/svg" class="ml-1 w-3 h-3"
@@ -594,7 +563,7 @@
                             </svg></button>
                         </div>
                       </th>
-                      <th scope="col" class="py-3 px-4">
+                      <th scope="col" class="py-3 px-4" onclick="sortTable(2)">
                         <div class="flex items-center">
                           Дата
                           <button class="sort-by-date"><svg xmlns="http://www.w3.org/2000/svg" class="ml-1 w-3 h-3"
@@ -623,10 +592,10 @@
               </div>
               <!-- ? Загальний список -->
               <div id="all" class="overflow-x-auto relative shadow-md sm:rounded-lg hidden">
-                <table id="table" class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                <table id="table3" class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                   <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                     <tr>
-                      <th scope="col" class="py-3 px-6">
+                      <th scope="col" class="py-3 px-6" onclick="sortTable(0)">
                         <div class="flex items-center">
                           Категорія
                           <button class="sort-by-category"><svg xmlns="http://www.w3.org/2000/svg" class="ml-1 w-3 h-3"
@@ -636,7 +605,7 @@
                             </svg></button>
                         </div>
                       </th>
-                      <th scope="col" class="py-3 px-3">
+                      <th scope="col" class="py-3 px-3" onclick="sortTableByPrice()">
                         <div class="flex items-center">
                           Сума
                           <button class="sort-by-price"><svg xmlns="http://www.w3.org/2000/svg" class="ml-1 w-3 h-3"
@@ -646,7 +615,7 @@
                             </svg></button>
                         </div>
                       </th>
-                      <th scope="col" class="py-3 px-4">
+                      <th scope="col" class="py-3 px-4" onclick="sortTable(2)">
                         <div class="flex items-center">
                           Дата
                           <button class="sort-by-date"><svg xmlns="http://www.w3.org/2000/svg" class="ml-1 w-3 h-3"
@@ -670,16 +639,10 @@
                     </tr>
                   </thead>
                   <tbody class="list">
-                    
+
                   </tbody>
-              
-                
                 </table>
               </div>
-
-
-
-
             </div>
           </div>
         </div>
@@ -689,8 +652,8 @@
 
     <!-- ? Контент "Статистика" -->
 
-    <div class="flex flex-col justify-center max-w-2xl p-4 bg-gray-50 rounded-lg dark:bg-gray-800 hidden" id="statistic-example"
-      role="tabpanel" aria-labelledby="statistic-tab-example">
+    <div class="flex flex-col justify-center max-w-2xl p-4 bg-gray-50 rounded-lg dark:bg-gray-800 hidden"
+      id="statistic-example" role="tabpanel" aria-labelledby="statistic-tab-example">
 
       <!-- ? Діапазон дати -->
       <div date-rangepicker class="flex items-center">
@@ -729,7 +692,7 @@
         </canvas>
       </div> -->
       <div>
-        <canvas id="chart-2" ></canvas>
+        <canvas id="chart-2"></canvas>
       </div>
     </div>
 
