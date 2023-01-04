@@ -4,14 +4,15 @@
   "description": "practice of node",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "test": "node server.js",
+    "start": "node server_module.js"
   },
   "author": "Viktor",
   "license": "ISC",
   "dependencies": {
     "express": "^4.18.2",
     "http": "0.0.1-security",
+    "loader": "^2.1.1",
     "os": "^0.1.2",
     "path": "^0.12.7"
   }
